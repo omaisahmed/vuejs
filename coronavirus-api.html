@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AXIOS Coronavirus API FETCH</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1 align="center">Fetch Coronavirus API Using Axios</h1>
+        <hr color="blue"/>
+        <br>
+        <div align="center">
+        <h2>Cases: {{info.cases}}</h2>
+        <h2>Deaths: {{info.deaths}}</h2>
+        <h2>Recovered: {{info.recovered}}</h2>
+        </div>
+      </div>
+
+      <script>                  
+   new Vue({
+  el: '#app',
+  data () {
+    return {
+      info: null
+    }
+  },
+  mounted () {
+    axios
+      .get('https://corona.lmao.ninja/v2/all')
+      .then(response => (this.info = response.data))
+  },
+});
+      </script>
+</body>
+</html>

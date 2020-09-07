@@ -1,0 +1,170 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>VUE JS</title>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <style>
+            .fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+        </style>
+    </head>
+    <body>
+        
+        <div id="app">
+            <!-- VUE BIND -->
+            <span v-bind:title="message">
+            Hello Omais!
+            </span>
+            <br>
+            <!-- IF CONDITION -->
+            <span v-if="seen">See Me</span>
+            <br>
+            <!-- FOR LOOP -->
+            <ol>
+                <li v-for="todo in todos">
+                    {{todo.text}}
+                </li>
+            </ol>
+            <br>
+            <!-- Handling userInput -->
+            <p>{{textreverse}}</p>
+            <button v-on:click="reverseText">Reverse Text</button>
+            <br>
+            <!-- MODEL (TWO WAY BINDING) -->
+            <h1>{{inputText}}</h1>
+            <input v-model="inputText"/>
+            <br>
+            <!-- COUNTER -->
+            <h1>{{counter}}</h1>
+            <button v-on:click="{{counter += 1}}">Add</button>
+            <br><br>
+            <!-- ALERT FUNCTION -->
+            <button v-on:click="greet">Greeting</button>
+            <br>
+            <!-- TRANSITION -->       
+            <transition name="fade"><h1 v-if="transition">Hello Omais</h1></transition>
+            <button @click="transition = !transition">Click To Fade</button>
+            <br><br>
+            <!-- ADD TWO NUMBERS -->
+            <h2>The Sum of 100+2500 is {{total}}</h2>
+            <button @click="displayNumbers">Display Result</button>
+            <br><br>
+            <!-- STYLING -->
+            <h1 v-bind:style="styleObj" v-on:mouseover="changebgcolor" v-on:mouseout="originalcolor">AMZ ONE STEP</h1>
+            <br><br>
+            <!-- BUTTON CLIKED ONLY ONCE -->
+            <h2>{{clickedonce}}</h2>
+            <button v-on:click.once="buttonClickedOnce">Clicked Once</button>
+            <br><br>
+            <!-- PREVENT -->
+            <a href = "http://www.google.com" v-on:click.prevent = "clickme" target = "_blank">Click Me</a>
+            <!-- KEYUP EVENT -->
+            <p>{{keyup}}</p>
+            <input type="text" v-on:keyup.enter="showInputValue" placeholder="Type Here and Press Enter">
+
+            <!--  -->
+            <p>{{keyup}}</p>
+            <input type="text" v-on:keyup.enter="showInputValue" placeholder="Type Here and Press Enter">
+        </div>
+
+            <!-- VUE COMPONENTS
+            <div id="components">
+                <button-counter></button-counter>
+            </div> -->
+
+        
+      
+
+        <script>
+            var vue=new Vue({
+                el: "#app",
+                data: {
+                    message: 'You loaded this page on ' + new Date().toLocaleString(),
+                    seen: 'false',
+                    todos: [
+                        {text:'Hello omais!'},
+                        {text:'Hello amric!'},
+                        {text:'Hello sherry!'},
+                        {text:'Hello roshan!'},
+                    ],
+                    textreverse: 'Omais',
+                    inputText: 'Please input any text here...',
+                    counter:0,
+                    name: 'Omais',
+                    transition: true,
+                    num1: 100,
+                    num2: 2400,
+                    total: '',
+                    styleObj:{
+                        width: 500,
+                        height: 200,
+                        backgroundColor: 'purple',
+                    },
+                    clickedonce:0,
+                    keyup: '',
+                    
+                
+                },
+                methods:{
+                    reverseText:function(){
+                        this.textreverse=this.textreverse.split('').reverse().join('');
+                    },
+                   
+                    greet:function(event){
+                        alert('Hello' + this.name + '!');
+                        if(event){
+                            alert(event.target.tagName);
+                        }
+
+                    },
+                    displayNumbers:function(event){
+                        return this.total=this.num1+this.num2;
+                    },
+                    changebgcolor:function(){
+                        this.styleObj.backgroundColor="red";
+
+                    },
+                    originalcolor:function(){
+                        this.styleObj.backgroundColor="green";
+
+                    },
+                    buttonClickedOnce:function(){
+                           this.clickedonce++;
+
+                    },
+                    clickme:function(){
+                            alert("Click to open another window");
+                    },
+                    showInputValue:function(event){
+                            this.keyup=event.target.value;
+                    },
+                
+                },
+                
+            });
+            // var vue=new Vue({
+            //     el: "#components"
+
+            // });
+            
+            // Vue.component('buttton-counter',{
+            //     data:function(){
+            //         return{
+            //             count:0
+            //         }
+            //     },
+            //     template: "<button @click='count++'>{{count}}</button>",
+
+            // });
+
+           
+        </script>
+    </body>
+    </html>
